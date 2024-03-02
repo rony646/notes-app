@@ -1,21 +1,22 @@
 import { StatusBar } from "expo-status-bar";
+import { NavigationContainer } from "@react-navigation/native";
+import { createNativeStackNavigator } from "@react-navigation/native-stack";
 import { Text } from "react-native";
 
-import styled from "styled-components/native";
 import Home from "./pages/home";
+import Create from "./pages/create";
+import Routes from "./utils/routes";
 
-const Container = styled.View`
-  align-items: center;
-  justify-content: center;
-  background: #252525;
-  flex: 1;
-`;
+const Stack = createNativeStackNavigator();
 
 export default function App() {
   return (
-    <Container>
-      <Home />
+    <NavigationContainer>
+      <Stack.Navigator screenOptions={{ headerShown: false }}>
+        <Stack.Screen name={Routes.home} component={Home} />
+        <Stack.Screen name={Routes.create} component={Create} />
+      </Stack.Navigator>
       <StatusBar style="auto" />
-    </Container>
+    </NavigationContainer>
   );
 }

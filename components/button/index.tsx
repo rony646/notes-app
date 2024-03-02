@@ -1,10 +1,10 @@
 import { Pressable, StyleProp, View, ViewStyle } from "react-native";
 
-interface ButtonProps {
+type ButtonProps = {
   onPress(): void;
   children: React.ReactNode;
   style?: StyleProp<ViewStyle>;
-}
+};
 
 const Button = ({ children, style, onPress }: ButtonProps) => {
   return (

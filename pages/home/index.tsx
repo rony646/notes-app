@@ -1,6 +1,11 @@
+import { NativeStackNavigationProp } from "@react-navigation/native-stack";
+
 import * as S from "./styles";
 import Header from "../../components/header";
-import { FlatList, Text } from "react-native";
+import { FlatList } from "react-native";
+import Card from "../../components/card";
+import FloatingButton from "../../components/floatingButton";
+import { RootStackParamList } from "../../utils/routes";
 
 const data = [
   {
@@ -23,7 +28,16 @@ const data = [
   },
 ];
 
-const Home = () => {
+type HomeScreenNavigationProp = NativeStackNavigationProp<
+  RootStackParamList,
+  "/home"
+>;
+
+type HomeProps = {
+  navigation: HomeScreenNavigationProp;
+};
+
+const Home = ({ navigation }: HomeProps) => {
   return (
     <S.Container>
       <Header />
@@ -32,9 +46,12 @@ const Home = () => {
         data={data}
         keyExtractor={(item) => item.id}
         renderItem={({ item }) => (
-          <Text style={{ color: "#fff" }}>{item.title}</Text>
+          <Card title={item.title} color={item.color} />
         )}
+        style={{ paddingHorizontal: 20, marginTop: 20 }}
       />
+
+      <FloatingButton onPress={() => navigation.navigate("/create")} />
     </S.Container>
   );
 };
